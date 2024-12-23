@@ -1,0 +1,25 @@
+# Define line endings handling for all text files
+* text=auto
+
+# Treat specific file types as binary (no end of line conversion)
+*.jpg binary
+*.png binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.exe binary
+*.dll binary
+
+# Force specific file types to use LF line endings
+*.sh text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.mjs text eol=lf
+*.md text eol=lf
+
+# Force Windows-specific files to use CRLF line endings
+*.bat text eol=crlf
+*.cmd text eol=crlf
