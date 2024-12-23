@@ -1,5 +1,5 @@
 
-# Controle de Serviços de Engenharia
+# Controle de Escala de Obreiros
 
 Um aplicativo para gerenciar e otimizar o controle de serviços prestados por engenheiros. O objetivo é proporcionar uma solução eficiente para cadastrar, acompanhar e gerenciar serviços, pagamentos e clientes.
 
