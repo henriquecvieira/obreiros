@@ -1,25 +1,14 @@
-import RepositoryImpl from "../../../infra/repository/index.mjs"
-import LogRepository from "../repositories/logs.mjs"
-import scheduleRepository from "../repositories/scheduleRepository.mjs"
-import createRoleValidator from "./validators/roles.mjs"
-import Role from "../use_cases/CreateRoles.mjs"
-import rolePresenter from "../presenters/createRolePresenter.mjs"
+import Schedule from "../use_cases/scheduleUseCase.mjs"
 
-const LRepository = new LogRepository(RepositoryImpl)
-const SchRepository = new scheduleRepository(RepositoryImpl)
-
-
-export async function schedule(req, res, next) {
+export async function schedule(req, res) {
   try {
-    const role = req.body
-    await createRoleValidator.validate(role)
-    const CreateRoleUseCase = new Role(SchRepository)
-    const createdRole = await CreateRoleUseCase.execute(role)
-    await RLRepository.save(createdRole)
-    const result = rolePresenter(createdRole)
+    const schedule = new Schedule()
+    console.log({req: req.body})
+    const createSchedule = await schedule.execute(req, res)
+    console.log({createSchedule})
     return res.status(200).json(result)
   } catch (error) {
-    return next(error)
+    console.log({error})
   }
 }
 
