@@ -1,6 +1,6 @@
-class Log {
+class schedule {
   constructor(repositoryImpl) {
-    this.collection = "roles"
+    this.collection = "schedule"
     this.repository = repositoryImpl
   }
   async save(params) {
@@ -32,4 +32,4 @@ class Log {
 
 }
 
-export default Log
+export default schedule

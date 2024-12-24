@@ -8,20 +8,23 @@ addFormats(ajv);
 const schema = {
   type: "object",
   properties: {
-    role: { type: "string",  }
-     },
-  required: ["role"],
-  additionalProperties: false,
+    name: { type: "string", minLength: 1 }, // Nome do obreiro
+    function: { type: "string", minLength: 1 }, // Função exercida
+    horario: { type: "string", minLength: 1 }, // Horário (pode ser refinado para formato específico, se necessário)
+    role: { type: "string", minLength: 1 }, // Papel ou cargo
+  },
+  required: ["name", "function", "horario", "role"],
+  additionalProperties: false, // Impede propriedades extras não especificadas no schema
 };
 
 async function validate(data) {
-  const validateObreiro = ajv.compile(schema);
-  const valid = validateObreiro(data);
+  const validateSchedule = ajv.compile(schema);
+  const valid = validateSchedule(data);
 
   if (valid) {
     return valid;
   }
-  throw new InvalidParameterException(JSON.stringify(validateObreiro.errors));
+  throw new InvalidParameterException(JSON.stringify(validateSchedule.errors));
 }
 
 export default {

@@ -1,23 +1,19 @@
 import UUIDGenerator from "../../support/UUIDGenerator.mjs"
-import { generatePassword } from "../../support/bccript.mjs"
 
-class CreateUser {
+class Role {
   constructor(repository, logUseCase) {
     this.repository = repository
     this.logUseCase = logUseCase
   }
 
-  async execute(user) {
-    const existentUser = await this.repository.getUserByName(user.name)
+  async execute(params) {
+    const existentUser = await this.repository.getUserByName(params.role)
     if (existentUser) {
-      throw new Error("User with the same name already exists")
+      throw new Error("That roles already exists!")
     }
-    const newUser = {
+    const newRole = {
       _id: UUIDGenerator.generate(),
-      name: user.name,
-      function: user.function,
-      gender: user.gender,
-      active: true, 
+      role: user.function,
       createdAt: new Date(),
     };
 
@@ -29,8 +25,8 @@ class CreateUser {
     // });
 
 
-    return newUser
+    return newRole
   }
 }
 
-export default CreateUser
+export default Role
