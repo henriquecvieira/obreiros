@@ -31,25 +31,6 @@ class RepositoryWrapper {
     const statement = this.queries.searchUserById
     return this.impl.findOne(collection, statement.query(id))
   }
-  async updateService(collection, id) {
-    const statement = this.queries.searchUserById
-    return this.impl.updateOne(collection, statement.query(id))
-  }
-  async savePasswordResetToken(collection, id, token, resetTokenExpiresAt) {
-    const statement = this.queries.savePasswordResetToken
-    const { filter, update } = statement.query(id, token, resetTokenExpiresAt)
-    return this.impl.updateOne(collection, filter, update)
-  }
-  async saveNewPassword(collection, { _id, newPassword }) {
-    const statement = this.queries.saveNewPassword
-    const { filter, update } = statement.query({ _id, newPassword })
-    return this.impl.updateOne(collection, filter, update)
-  }
-  async searchUserByCreatedId(collection, id) {
-    const statement = this.queries.searchUserByCreatedId
-    return this.impl.findOne(collection, statement.query(id))
-  }
-
   async searchUsersByDate(collection, createdAt) {
     const statement = this.queries.searchUsersByDate
     return this.impl.find(collection, statement.query(createdAt))
@@ -58,21 +39,20 @@ class RepositoryWrapper {
     const statement = this.queries.searchUserByEmail
     return this.impl.findOne(collection, statement.query(email))
   }
-  async getUserByName(collection, name) {
-    const statement = this.queries.getUserByName
-    return this.impl.findOne(collection, statement.query(name))
+  async getRole(collection, params) {
+    const statement = this.queries.getRole
+    return this.impl.findOne(collection, statement.query(params))
   }
 
   async getUserByIdOrEmail(collection, data) {
     const statement = this.queries.queryGetByIdOrEmail
     return this.impl.findOne(collection, statement.query(data))
   }
-
-  async logicalDelete(collection, data) {
-    const statement = this.queries.queryLogicalDelete
-    const { filter, update } = statement.query(data)
-    return this.impl.updateOne(collection, filter, update)
+  async getUserByName(collection, data) {
+    const statement = this.queries.getUserByName
+    return this.impl.findOne(collection, statement.query(data))
   }
+
 
   async findLogs(collection, data) {
     const statement = this.queries.logs
