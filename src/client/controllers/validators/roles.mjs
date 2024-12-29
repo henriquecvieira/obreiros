@@ -8,13 +8,10 @@ addFormats(ajv);
 const schema = {
   type: "object",
   properties: {
-    name: { type: "string", minLength: 1 }, // Nome do obreiro
-    function: { type: "string", minLength: 1 }, // Função exercida
-    horario: { type: "string", minLength: 1 }, // Horário (pode ser refinado para formato específico, se necessário)
-    role: { type: "string", minLength: 1 }, // Papel ou cargo
+    role: { type: "string", minLength: 1 }, 
   },
-  required: ["name", "function", "horario", "role"],
-  additionalProperties: false, // Impede propriedades extras não especificadas no schema
+  required: ["role"],
+  additionalProperties: false, 
 };
 
 async function validate(data) {

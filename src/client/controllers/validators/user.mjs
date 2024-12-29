@@ -11,8 +11,9 @@ const schema = {
     name: { type: "string", minLength: 2 },
     function: { type: "string", enum: ["Pastor", "Pastor Evangelista", "Presbítero", "Oficial Obreiro","Diácono", "Diaconisa", "Cooperador(a)", ] },
     gender: { type: "string", enum: ["homem", "mulher"] },
+    active: { type: "boolean" },
   },
-  required: ["name", "function", "gender"],
+  required: ["name", "function", "gender", "active"],
   additionalProperties: false,
 };
 

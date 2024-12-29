@@ -17,15 +17,13 @@
     "airbnb-base"
   ],
   "rules": {
-    "semi": "off",
-    "no-console": "off",
+    "semi": "error",
+    "no-console": "warn",
     "import/prefer-default-export": "error",
     "no-underscore-dangle": [
       "off"
     ],
-    "linebreak-style": [
-      "error",
-      "windows"
+    "linebreak-style": ["off"
     ],
     "no-plusplus": [
       "error",

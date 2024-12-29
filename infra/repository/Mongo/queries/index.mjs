@@ -1,3 +1,4 @@
+import { default as getRole } from "./getRole.mjs"
 import { default as getUserByName } from "./getUserByName.mjs"
 import { default as searchUserById } from "./searchUserById.mjs"
 import { default as updateService } from "./updateService.mjs"
@@ -12,6 +13,7 @@ import { default as logsByUserId } from "./logsByUserId.mjs"
 
 
 export {
+  getRole,
   getUserByName,
   searchUserById,
   updateService,

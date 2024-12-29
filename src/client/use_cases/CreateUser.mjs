@@ -2,9 +2,9 @@ import UUIDGenerator from "../../support/UUIDGenerator.mjs"
 import { generatePassword } from "../../support/bccript.mjs"
 
 class CreateUser {
-  constructor(repository, logUseCase) {
+  constructor(repository) {
     this.repository = repository
-    this.logUseCase = logUseCase
+    // this.logUseCase = logUseCase
   }
 
   async execute(user) {
