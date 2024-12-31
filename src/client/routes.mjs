@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { listWorkers, schedule, taskAssignment, confirmTaskAssignment } from "../client/controllers/scheduleController.mjs";
 import { createUser } from "../client/controllers/userController.mjs";
+import { listWorkers, schedule, taskAssignment, confirmTaskAssignment } from "../client/controllers/scheduleController.mjs";
 
 const router = Router();
-
 
 router.route("/v1/createUser").post(createUser);
 router.route("/v1/obreiro/list").get(listWorkers);

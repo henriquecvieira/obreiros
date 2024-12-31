@@ -13,10 +13,17 @@ const FunctionAssignment = () => {
   const [obreiros, setObreiros] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/obreiro/list")
-      .then(response => setObreiros(response.data))
-      .catch(error => console.error("Erro ao buscar obreiros:", error));
+    const fetchObreiros = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/v1/obreiro/list");
+        setObreiros(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar obreiros:", error);
+      }
+    };
+    fetchObreiros();
   }, []);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;

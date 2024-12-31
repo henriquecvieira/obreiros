@@ -12,7 +12,7 @@ export async function listWorkers(req, res, next) {
   try {
     const getWorker = new CreateSchedule(repository);
     const workers = await getWorker.loadWorkers();
-    return res.status(200).json(workers);
+     return res.status(200).json(workers);
   } catch (error) {
     return next(error);
   }

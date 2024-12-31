@@ -14,7 +14,8 @@ let {
 } = process.env
 
 if (Application.isInLocalMode()) {
-  DB_URI = `mongodb://${DB_USER_LOCAL}:${DB_PASSWORD_LOCAL}@${DB_HOST_LOCAL}:${DB_PORT_LOCAL}?authSource=admin`
+  // DB_URI = `mongodb://${DB_USER_LOCAL}:${DB_PASSWORD_LOCAL}@${DB_HOST_LOCAL}:${DB_PORT_LOCAL}?authSource=admin`
+  DB_URI = `mongodb://127.0.0.1:27017/`
 }
 
 const databaseClient = new Mongo(DB_URI, DB_NAME)

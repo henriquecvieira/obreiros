@@ -6,7 +6,7 @@ const UserRegistration = () => {
   const [formData, setFormData] = useState({
     name: "",
     gender: "homem",
-    function: "", // Inicialmente a função será vazia
+    function: "", 
     active: true,
   });
 
