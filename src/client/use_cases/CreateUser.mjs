@@ -17,7 +17,7 @@ class CreateUser {
       name: user.name,
       function: user.function,
       gender: user.gender,
-      active: true, 
+      active: true,
       createdAt: new Date(),
     };
 

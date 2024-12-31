@@ -32,7 +32,7 @@ class User {
     return data
   }
 
-  async getAllUsers(id) {
+  async getAll() {
     const data = await this.repository.getAll(this.collection)
     if (data?.length === 0) {
       return null

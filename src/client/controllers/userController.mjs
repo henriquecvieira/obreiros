@@ -1,5 +1,5 @@
 import RepositoryImpl from "../../../infra/repository/index.mjs"
-import UserRepository from "../repositories/userRespository.mjs"
+import UserRepository from "../repositories/userRepository.mjs"
 import createUserValidator from "./validators/user.mjs"
 import Create from "../use_cases/CreateUser.mjs"
 import userPresenter from "../presenters/userPresenter.mjs"
@@ -19,5 +19,6 @@ export async function createUser(req, res, next) {
     return next(error)
   }
 }
+
 
 

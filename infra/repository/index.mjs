@@ -53,25 +53,14 @@ class RepositoryWrapper {
     return this.impl.findOne(collection, statement.query(data))
   }
 
-
-  async findLogs(collection, data) {
-    const statement = this.queries.logs
-    return this.impl.find(collection, statement.query(data));
+  async getScheduleByDateAndTime(collection, date, time) {
+    const statement = this.queries.getScheduleByDateAndTime;
+    return this.impl.find(collection, statement.query(date, time));
   }
-  async logsByAction(collection, action) {
-    const statement = this.queries.logsByAction
-    return this.impl.find(collection, statement.query(action));
+  async getTemporaryScheduleById(collection, scheduleId) {
+    const statement = this.queries.getTemporaryScheduleById;
+    return this.impl.findOne(collection, statement.query(scheduleId));
   }
-  async logsByDate(collection, data) {
-    const statement = this.queries.logsByDate
-    return this.impl.find(collection, statement.query(data))
-  }
-  async logsByUserId(collection, data) {
-    const statement = this.queries.logsByUserId
-    return this.impl.find(collection, statement.query(data))
-  }
-
-
 }
 
 export { Implementation } from "./Mongo/index.mjs"

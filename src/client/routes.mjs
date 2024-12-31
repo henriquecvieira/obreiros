@@ -1,17 +1,14 @@
-import {
-  createUser,
-} from "../client/controllers/userController.mjs"
-import {
-  schedule,
-} from "../client/controllers/scheduleController.mjs"
-import {
-  newRole,
-} from "../client/controllers/roleController.mjs"
-import { Router } from "express"
+import { Router } from "express";
+import { listWorkers, schedule, taskAssignment, confirmTaskAssignment } from "../client/controllers/scheduleController.mjs";
+import { createUser } from "../client/controllers/userController.mjs";
 
-const router = Router()
+const router = Router();
 
-router.route("/v1/createUser").post(createUser)
-router.route("/v1/createSchedule").post(schedule)
-router.route("/v1/role").post(newRole)
-export default router
+
+router.route("/v1/createUser").post(createUser);
+router.route("/v1/obreiro/list").get(listWorkers);
+router.route("/v1/escala/create").post(schedule);
+router.route("/v1/task/assign").post(taskAssignment);
+router.route("/v1/task/confirm/:scheduleId").post(confirmTaskAssignment);
+
+export default router;
