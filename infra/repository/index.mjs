@@ -12,8 +12,8 @@ class RepositoryWrapper {
   save(collection, data) {
     return this.impl.save(collection, data)
   }
-  saveLog(collection, data) {
-    return this.impl.saveLog(collection, data)
+  saveWorker(collection, data) {
+    return this.impl.saveWorker(collection, data)
   }
 
   remove(collection, id) {

@@ -4,13 +4,13 @@ import axios from "axios";
 const FunctionAssignment = () => {
   const [formData, setFormData] = useState({
     obreiroId: "",
-    role: "",
-    cargo: "",
-    gender: "",
+    department: "",
     date: "",
     time: "",
   });
   const [obreiros, setObreiros] = useState([]);
+  const [temporarySchedule, setTemporarySchedule] = useState([]);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     const fetchObreiros = async () => {
@@ -24,22 +24,54 @@ const FunctionAssignment = () => {
     fetchObreiros();
   }, []);
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Encontrar o nome do obreiro baseado no ID
+    const obreiro = obreiros.find((obreiro) => obreiro.id === formData.obreiroId);
+
+    if (obreiro) {
+      // Criar um novo item para a escala temporária
+      const newScheduleItem = {
+        name: obreiro.name,
+        department: formData.department,
+        date: formData.date,
+        time: formData.time,
+      };
+
+      // Adicionar esse item à escala temporária
+      setTemporarySchedule([...temporarySchedule, newScheduleItem]);
+
+      // Limpar o formulário
+      setFormData({
+        obreiroId: "",
+        department: "",
+        date: "",
+        time: "",
+      });
+    }
+  };
+
+  const handleConfirm = async () => {
     try {
-      // Enviar os dados da escala para o backend
-      const response = await axios.post("http://localhost:3000/v1/escala/create", formData);
-      alert("Escala cadastrada com sucesso!");
-      console.log(response.data);
+      setIsSaving(true);
+
+      // Enviar a escala temporária para o backend (salvando os dados)
+      await axios.post("http://localhost:3000/v1/escala/create", { schedule: temporarySchedule });
+
+      // Limpar a escala temporária após salvar
+      setTemporarySchedule([]);
+      alert("Escala confirmada e salva com sucesso!");
     } catch (error) {
-      console.error("Erro ao cadastrar escala:", error);
-      alert("Erro ao cadastrar a escala.");
+      console.error("Erro ao salvar a escala:", error);
+      alert("Houve um erro ao salvar a escala.");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -65,9 +97,9 @@ const FunctionAssignment = () => {
           </select>
         </div>
 
-        {/* Seleção de função */}
+        {/* Seleção de departamento */}
         <div style={{ marginBottom: "15px" }}>
-          <label htmlFor="role" style={{ fontSize: "14px", color: "#333" }}>Departamento:</label>
+          <label htmlFor="department" style={{ fontSize: "14px", color: "#333" }}>Departamento:</label>
           <select
             id="department"
             name="department"
@@ -128,9 +160,40 @@ const FunctionAssignment = () => {
             marginTop: "10px",
           }}
         >
-          Gerar Escala
+          Adicionar
         </button>
       </form>
+
+      {/* Exibição da Escala Temporária */}
+      <div style={{ marginTop: "30px", padding: "10px", backgroundColor: "#f1f1f1", borderRadius: "8px" }}>
+        <h3 style={{ color: "#007bff" }}>Escala Temporária</h3>
+        <ul>
+          {temporarySchedule.map((item, index) => (
+            <li key={index} style={{ marginBottom: "10px" }}>
+              <strong>{item.name}</strong> - {item.department} - {item.date} - {item.time}
+            </li>
+          ))}
+        </ul>
+
+        {/* Botão de confirmação */}
+        <button
+          onClick={handleConfirm}
+          style={{
+            width: "100%",
+            padding: "12px",
+            borderRadius: "4px",
+            backgroundColor: "#17a2b8",
+            color: "white",
+            border: "none",
+            fontSize: "16px",
+            cursor: "pointer",
+            marginTop: "10px",
+          }}
+          disabled={isSaving}
+        >
+          {isSaving ? "Salvando..." : "Confirmar e Salvar Escala"}
+        </button>
+      </div>
     </div>
   );
 };

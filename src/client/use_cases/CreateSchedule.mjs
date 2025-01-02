@@ -19,46 +19,24 @@ class CreateSchedule {
       throw new Error("Erro ao carregar os obreiros.")
     }
   }
-  async execute(schedule) {
-    // const existentSchedule = await this.repository.getScheduleByDateAndTime(schedule.date, schedule.time);
-    // if (existentSchedule) {
-    //   throw new Error("Já existe um obreiro agendado para esta data e horário.");
-    // }
-
-    const newSchedule = {
+  async execute(params) {
+    const schedule = params.schedule
+    for (let i = 0; i < schedule.length; i++) {
+     const newSchedule = {
       _id: UUIDGenerator.generate(),
-      obreiroId: schedule.obreiroId,
-      department: schedule.department,
-      date: schedule.date,
-      time: schedule.time,
-      createdAt: new Date(),
-      confirmed: false,
-    };
+        name: schedule[i].name.trim(),
+        department: schedule[i].department,
+        time: schedule[i].time,
+        date: new Date(`${schedule[i].date}T${schedule[i].time}:00.000Z`),
+        createdAt: new Date(),
+     }
+     const confirmedSchedule = await this.scheduleRepository.save(newSchedule);
 
-    await RedisWrapper.saveTemporarySchedule(newSchedule);
-    console.log('Agendamento temporário salvo no Redis:', newSchedule);
-
-    const confirmedSchedule = await this.confirmSchedule(newSchedule._id);
-    console.log('Escala confirmada:', confirmedSchedule);
-
-    return newSchedule;
-  }
-
-  async confirmSchedule(scheduleId) {
-    const temporarySchedule = await RedisWrapper.getTemporaryScheduleById(scheduleId);
-    console.log('Escala recuperada:', temporarySchedule)
-    if (!temporarySchedule) {
-      throw new Error("Escala não encontrada.");
     }
+    return true
 
-    temporarySchedule.confirmed = true;
-
-    const confirmedSchedule = await this.scheduleRepository.save(temporarySchedule);
-
-    await RedisWrapper.deleteTemporarySchedule(scheduleId);
-
-    return confirmedSchedule;
   }
+
 }
 
 export default CreateSchedule;

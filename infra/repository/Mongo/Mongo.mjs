@@ -50,10 +50,11 @@ class Mongo {
       .updateOne({ _id }, { $set: data }, { upsert: true })
   }
 
-  saveLog(collection, data) {
+  saveWorker(collection, data) {
+    const { _id } = data
     return this.connection
       .collection(collection)
-      .insertOne(data);
+      .insertOne({ _id }, { $set: data }, { upsert: true })
   }
 
   updateOne(collection, filter, update, options = {}) {
