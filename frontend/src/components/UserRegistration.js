@@ -6,7 +6,7 @@ const UserRegistration = () => {
   const [formData, setFormData] = useState({
     name: "",
     gender: "homem",
-    function: "", 
+    role: "",
     active: true,
   });
 
@@ -55,22 +55,20 @@ const UserRegistration = () => {
           >
             <option value="homem">Homem</option>
             <option value="mulher">Mulher</option>
-            <option value="outro">Outro</option>
           </select>
         </div>
 
-        {/* Alterando o campo "Função" para um dropdown */}
         <div style={{ marginBottom: "15px" }}>
-          <label htmlFor="function" style={{ fontSize: "14px", color: "#333" }}>Função:</label>
+          <label htmlFor="role" style={{ fontSize: "14px", color: "#333" }}>Cargo:</label>
           <select
-            id="function"
-            name="function"
-            value={formData.function}
+            id="role"
+            name="role"
+            value={formData.role}
             onChange={handleChange}
             required
             style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc", fontSize: "16px", marginTop: "5px" }}
           >
-            <option value="">Selecione a função</option> {/* Opção de placeholder */}
+            <option value="">Selecione o cargo</option> {/* Opção de placeholder */}
             <option value="Pastor">Pastor</option>
             <option value="Pastor Evangelista">Pastor Evangelista</option>
             <option value="Presbítero">Presbítero</option>

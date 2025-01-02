@@ -15,7 +15,7 @@ class CreateUser {
     const newUser = {
       _id: UUIDGenerator.generate(),
       name: user.name,
-      function: user.function,
+      role: user.role,
       gender: user.gender,
       active: true,
       createdAt: new Date(),

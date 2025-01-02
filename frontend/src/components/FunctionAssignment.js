@@ -4,7 +4,7 @@ import axios from "axios";
 const FunctionAssignment = () => {
   const [formData, setFormData] = useState({
     obreiroId: "",
-    function: "",
+    role: "",
     cargo: "",
     gender: "",
     date: "",
@@ -34,7 +34,7 @@ const FunctionAssignment = () => {
     e.preventDefault();
     try {
       // Enviar os dados da escala para o backend
-      const response = await axios.post("http://localhost:3000/escala/create", formData);
+      const response = await axios.post("http://localhost:3000/v1/escala/create", formData);
       alert("Escala cadastrada com sucesso!");
       console.log(response.data);
     } catch (error) {
@@ -67,22 +67,22 @@ const FunctionAssignment = () => {
 
         {/* Seleção de função */}
         <div style={{ marginBottom: "15px" }}>
-          <label htmlFor="function" style={{ fontSize: "14px", color: "#333" }}>Função:</label>
+          <label htmlFor="role" style={{ fontSize: "14px", color: "#333" }}>Departamento:</label>
           <select
-            id="function"
-            name="function"
-            value={formData.function}
+            id="department"
+            name="department"
+            value={formData.department}
             onChange={handleChange}
             required
             style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc", fontSize: "16px", marginTop: "5px" }}
           >
-            <option value="">Selecione uma função</option>
+            <option value="">Selecione um Departamento</option>
             <option value="Portaria">Portaria</option>
             <option value="Limpeza">Limpeza</option>
             <option value="Cozinha">Cozinha</option>
-            <option value="Nave da Igreja">Nave da Igreja</option>
+            <option value="Nave da Igreja">Nave</option>
             <option value="Som">Som</option>
-            <option value="Departamento Infantil">Departamento Infantil</option>
+            <option value="Departamento Infantil">Infantil</option>
           </select>
         </div>
 

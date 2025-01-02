@@ -1,11 +1,11 @@
 import RepositoryImpl from "../../../infra/repository/index.mjs"
-import ScheduleRepository from "../repositories/scheduleRepository.mjs"
 import Repository from "../repositories/userRepository.mjs"
+import ScheduleRepository from "../repositories/scheduleRepository.mjs"
 import CreateSchedule from "../use_cases/CreateSchedule.mjs"
 import RedisWrapper from "../../support/RedisWrapper.mjs"
 
-const scheduleRepository = new ScheduleRepository(RepositoryImpl)
 const repository = new Repository(RepositoryImpl)
+const scheduleRepository = new ScheduleRepository(RepositoryImpl)
 
 
 export async function listWorkers(req, res, next) {
@@ -19,8 +19,9 @@ export async function listWorkers(req, res, next) {
 }
 export async function schedule(req, res, next) {
   try {
-    const schedule = new CreateSchedule(scheduleRepository)
-    const createSchedule = await schedule.execute(req, res)
+    const data = req.body
+    const schedule = new CreateSchedule(repository, scheduleRepository)
+    const createSchedule = await schedule.execute(data)
     return res.status(200).json(createSchedule)
   } catch (error) {
     return next(error)

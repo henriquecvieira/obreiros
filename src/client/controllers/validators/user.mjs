@@ -9,11 +9,11 @@ const schema = {
   type: "object",
   properties: {
     name: { type: "string", minLength: 2 },
-    function: { type: "string", enum: ["Pastor", "Pastor Evangelista", "Presbítero", "Oficial Obreiro", "Diácono", "Diaconisa", "Cooperador(a)",] },
     gender: { type: "string", enum: ["homem", "mulher"] },
+    role: { type: "string", enum: ["Pastor", "Pastor Evangelista", "Presbítero", "Oficial Obreiro(a)", "Diácono", "Diaconisa", "Cooperador(a)",] },
     active: { type: "boolean" },
   },
-  required: ["name", "function", "gender", "active"],
+  required: ["name", "role", "gender", "active"],
   additionalProperties: false,
 };
 
