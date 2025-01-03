@@ -28,7 +28,7 @@ const UserRegistration = () => {
   };
 
   return (
-    <div style={{ maxWidth: "500px", margin: "50px auto", padding: "20px", backgroundColor: "#f8f9fa", borderRadius: "8px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}>
+    <div style={{ maxWidth: "600px", margin: "50px auto", padding: "20px", backgroundColor: "#f8f9fa", borderRadius: "8px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}>
       <h1 style={{ textAlign: "center", color: "#007bff" }}>Cadastro de Usuário</h1>
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: "15px" }}>
@@ -40,7 +40,7 @@ const UserRegistration = () => {
             value={formData.name}
             onChange={handleChange}
             required
-            style={{ width: "95.5%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc", fontSize: "16px", marginTop: "5px" }}
+            style={{ width: "96%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc", fontSize: "16px", marginTop: "5px" }}
           />
         </div>
 

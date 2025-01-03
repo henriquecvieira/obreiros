@@ -1,5 +1,4 @@
 import UUIDGenerator from "../../support/UUIDGenerator.mjs";
-import RedisWrapper from "../../support/RedisWrapper.mjs";
 
 class CreateSchedule {
   constructor(repository, scheduleRepository) {
@@ -30,7 +29,7 @@ class CreateSchedule {
         date: new Date(`${schedule[i].date}T${schedule[i].time}:00.000Z`),
         createdAt: new Date(),
      }
-     const confirmedSchedule = await this.scheduleRepository.save(newSchedule);
+   await this.scheduleRepository.save(newSchedule);
 
     }
     return true

@@ -2,13 +2,14 @@ import RepositoryImpl from "../../../infra/repository/index.mjs"
 import Repository from "../repositories/userRepository.mjs"
 import ScheduleRepository from "../repositories/scheduleRepository.mjs"
 import CreateSchedule from "../use_cases/CreateSchedule.mjs"
-import RedisWrapper from "../../support/RedisWrapper.mjs"
+import GetByDate from "../use_cases/GetByDate.mjs"
+import path from 'path'
 
 const repository = new Repository(RepositoryImpl)
 const scheduleRepository = new ScheduleRepository(RepositoryImpl)
 
 
-export async function listWorkers(req, res, next) {
+export async function listWorkers(_, res, next) {
   try {
     const getWorker = new CreateSchedule(repository);
     const workers = await getWorker.loadWorkers();
@@ -27,29 +28,27 @@ export async function schedule(req, res, next) {
     return next(error)
   }
 }
-
-export async function taskAssignment(req, res, next) {
+export async function getScheduleByDate(req, res, next) {
   try {
-    await RedisWrapper.saveTemporarySchedule(data);
-    return res.status(200).json(data);
+    const { startDate, endDate } = req.query;
+    console.log("Start Date:", startDate)
+    console.log("End Date:", endDate)
+    const getByDate = new GetByDate(scheduleRepository);
+    const pdfPath = await getByDate.execute(startDate, endDate);
+    const absolutePdfPath = path.resolve(pdfPath)
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline; filename="escala.pdf"');
+    res.sendFile(absolutePdfPath, (error) => {
+      if (error) {
+        console.error("Erro ao enviar o arquivo PDF", error);
+        res.status(500).send("Erro ao gerar o PDF.");
+      }
+    });
   } catch (error) {
     return next(error);
   }
 }
 
-export async function confirmTaskAssignment(req, res, next) {
-  try {
-    const { scheduleId } = req.params;
-    const temporarySchedule = await RedisWrapper.getTemporaryScheduleById(scheduleId);
-    if (!temporarySchedule) {
-      return res.status(404).json({ message: "Temporary schedule not found" });
-    }
-    const createScheduleUseCase = new CreateSchedule(scheduleRepository);
-    const confirmedSchedule = await createScheduleUseCase.confirmSchedule(scheduleId);
-    return res.status(200).json(confirmedSchedule);
-  } catch (error) {
-    return next(error);
-  }
-}
+
 
 

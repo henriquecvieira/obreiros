@@ -1,9 +1,9 @@
 import { default as getUserByName } from "./getUserByName.mjs"
 
-import { default as getScheduleByDateAndTime } from "./getScheduleByDateAndTime.mjs"
+import { default as getScheduleByDate } from "./getScheduleByDate.mjs"
 
 
 export {
   getUserByName,
-  getScheduleByDateAndTime
+  getScheduleByDate
 }

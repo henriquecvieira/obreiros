@@ -76,11 +76,11 @@ const FunctionAssignment = () => {
   };
 
   return (
-    <div style={{ maxWidth: "500px", margin: "50px auto", padding: "20px", backgroundColor: "#f8f9fa", borderRadius: "8px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}>
+    <div style={{ maxWidth: "600px", margin: "50px auto", padding: "20px", backgroundColor: "#f8f9fa", borderRadius: "8px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}>
       <h1 style={{ textAlign: "center", color: "#007bff" }}>Cadastro de Escala</h1>
       <form onSubmit={handleSubmit}>
         {/* Campo para selecionar obreiro */}
-        <div style={{ marginBottom: "15px" }}>
+        <div style={{ marginBottom: "14px" }}>
           <label htmlFor="obreiroId" style={{ fontSize: "14px", color: "#333" }}>Obreiro:</label>
           <select
             id="obreiroId"
@@ -88,7 +88,7 @@ const FunctionAssignment = () => {
             value={formData.obreiroId}
             onChange={handleChange}
             required
-            style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc", fontSize: "16px", marginTop: "5px" }}
+            style={{ width: "99%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc", fontSize: "16px", marginTop: "5px" }}
           >
             <option value="">Selecione um obreiro</option>
             {obreiros.map((obreiro) => (
@@ -106,7 +106,7 @@ const FunctionAssignment = () => {
             value={formData.department}
             onChange={handleChange}
             required
-            style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc", fontSize: "16px", marginTop: "5px" }}
+            style={{ width: "99%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc", fontSize: "16px", marginTop: "5px" }}
           >
             <option value="">Selecione um Departamento</option>
             <option value="Portaria">Portaria</option>

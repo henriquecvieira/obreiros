@@ -24,15 +24,14 @@ class schedule {
     return data
   }
 
-  async getScheduleByDateAndTime(date, time) {
-    return this.repository.getScheduleByDateAndTime(this.collection, date, time);
+  async getScheduleByDate(startDate, endDate) {
+    const data = this.repository.getScheduleByDate(this.collection, startDate, endDate)
+    if (data?.length === 0){
+    return null
+    }
+  return data
   }
-  async getTemporaryScheduleById(scheduleId) {
-    return this.repository.getTemporaryScheduleById(this.collection, scheduleId);
-  }
-  async deleteTemporarySchedule(scheduleId) {
-    return this.repository.remove(this.collection, scheduleId);
-  }
+
 }
 
 export default schedule
